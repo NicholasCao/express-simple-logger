@@ -1,6 +1,8 @@
 # express-simple-logger
 
- a logger middleware for [express](https://github.com/expressjs/express).Similar with [koa-logger](https://github.com/koajs/logger)
+[![npm version][npm-image]][npm-url]
+
+ A logger middleware for [express](https://github.com/expressjs/express).Similar with [koa-logger](https://github.com/koajs/logger).
 
 
 ```
@@ -19,7 +21,10 @@
 ```js
 $ npm i express-simple-logger
 ```
-or use yarn
+or
+```js
+$ yarn add express-simple-logger
+```
 
 ## Example
 
@@ -41,8 +46,7 @@ app.use(logger())
 
 ```js
 app.use(logger({
-    unless: ['/frequentReq']
-  }
+  unless: ['/ignorepath']
 }))
 ```
   so that the logger won't log the 'unless' path
@@ -50,3 +54,6 @@ app.use(logger({
 ## License
 
   MIT
+
+[npm-image]: https://img.shields.io/npm/v/express-simple-logger.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/express-simple-logger
