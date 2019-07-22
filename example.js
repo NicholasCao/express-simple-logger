@@ -13,7 +13,8 @@ app.use(function (req, res, next) {
 })
 
 app.use(function (req, res, next) {
-  if (req.path === '/ignorepath') res.send('/api')
+  if (req.path === '/ignorepath') res.send('ignorepath')
+  return next()
 })
 
 app.listen(3000, () => console.log('server listening on port 3000!'))
