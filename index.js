@@ -28,12 +28,23 @@ module.exports = function (opt) {
 
     log(`[${dateFormat()}] <-- ${req.method} ${req.path}`)
 
-    try {
-      await next()
-    } catch (err) {
-      throw err
+    next()
+
+
+    const onfinish = done.bind(null, 'finish')
+    const onclose = done.bind(null, 'close')
+
+    res.once('finish', onfinish)
+    res.once('close', onclose)
+
+    function done (event) {
+      res.removeListener('finish', onfinish)
+      res.removeListener('close', onclose)
+      let upstream = event === 'close' ? '-x-' : '-->',
+        delta = Date.now() - start,
+        time = delta > 1000 ? Math.round(delta / 1000) + 's' : delta + 'ms'
+      log(`[${dateFormat()}] ${upstream} ${req.method} ${req.originalUrl} ${res.statusCode || 404} ${time}`)
     }
 
-    log(`[${dateFormat()}] --> ${req.method} ${req.originalUrl} ${res.statusCode || 404} ${Date.now() - start}ms`)
   }
 }
