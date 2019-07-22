@@ -1,0 +1,20 @@
+{
+  "name": "express-simple-logger",
+  "description": "Logging middleware for express",
+  "repository": "NicholasCao/express-simple-logger",
+  "version": "1.0.0",
+  "keywords": [
+    "express",
+    "middleware",
+    "logger",
+    "log"
+  ],
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "NicholasCao",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.17.1"
+  }
+}
