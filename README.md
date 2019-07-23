@@ -42,15 +42,21 @@ app.use(logger())
   Recommended that you `.use()` this middleware near the top
   to "wrap" all subsequent middleware.
 
-## Use Config
+## Config
 
+|params|type|required|description|
+|---|---|---|---|
+|unless|Array|false|ignore path list||
+|logTime|Boolean|false|whether to log time||
+
+### example
 ```js
 app.use(logger({
   unless: ['/ignorepath'],
   logTime: false
 }))
 ```
-  so that the logger won't log the 'unless' path
+
 
 ## License
 
