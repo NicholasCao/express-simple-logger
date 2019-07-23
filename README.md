@@ -46,7 +46,8 @@ app.use(logger())
 
 ```js
 app.use(logger({
-  unless: ['/ignorepath']
+  unless: ['/ignorepath'],
+  logTime: false
 }))
 ```
   so that the logger won't log the 'unless' path

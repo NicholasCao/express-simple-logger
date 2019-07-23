@@ -15,21 +15,27 @@ const dateFormat = function () {
     minute = padStart(now.getMinutes()),
     second = padStart(now.getSeconds())
 
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+  return `[${year}-${month}-${day} ${hour}:${minute}:${second}] `
 }
 
+const defaultOption = {
+  unless: [],
+  logTime: true
+}
 
-module.exports = function (opt) {
-  return async function (req, res, next) {
-    if (opt && opt.unless && opt.unless.indexOf(req.path) > -1) {
+module.exports = function (opt = {}) {
+  return function (req, res, next) {
+    opt = { ...defaultOption, ...opt}
+
+    if (opt.unless.indexOf(req.path) > -1) {
       return next()
     }
+
     let start = Date.now()
 
-    log(`[${dateFormat()}] <-- ${req.method} ${req.path}`)
+    log(`${opt.logTime ? dateFormat() : ''}<-- ${req.method} ${req.path}`)
 
     next()
-
 
     const onfinish = done.bind(null, 'finish')
     const onclose = done.bind(null, 'close')
@@ -43,7 +49,7 @@ module.exports = function (opt) {
       let upstream = event === 'close' ? '-x-' : '-->',
         delta = Date.now() - start,
         time = delta > 1000 ? Math.round(delta / 1000) + 's' : delta + 'ms'
-      log(`[${dateFormat()}] ${upstream} ${req.method} ${req.originalUrl} ${res.statusCode || 404} ${time}`)
+      log(`${opt.logTime ? dateFormat() : ''}${upstream} ${req.method} ${req.originalUrl} ${res.statusCode || 404} ${time}`)
     }
 
   }

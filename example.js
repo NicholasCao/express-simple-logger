@@ -3,9 +3,7 @@ const app = express()
 
 const logger = require('./index')
 
-app.use(logger({
-  unless: ['/ignorepath']
-}))
+app.use(logger())
 
 app.use(function (req, res, next) {
   if (req.path === '/') res.send('Hello World!')
