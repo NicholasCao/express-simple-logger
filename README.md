@@ -47,7 +47,7 @@ app.use(logger())
 ## Option
 
 |params|type|required|default|description|
-|---|---|---|---|
+|---|---|---|---|---|
 |unless|Array|false|[]|ignore path list|
 |logTime|Boolean|false|true|whether to log time|
 |logger|Function|false|--|custom logger  (str:String, args:Array)|
