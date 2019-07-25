@@ -2,7 +2,7 @@
   "name": "express-simple-logger",
   "description": "Logging middleware for express",
   "repository": "NicholasCao/express-simple-logger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "keywords": [
     "express",
     "middleware",
@@ -18,13 +18,12 @@
   "author": "NicholasCao",
   "license": "MIT",
   "devDependencies": {
-    "express": "^4.17.1"
-  },
-  "dependencies": {
     "chai": "^4.2.0",
+    "express": "^4.17.1",
     "mocha": "^6.2.0",
     "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0",
     "supertest": "^4.0.2"
-  }
+  },
+  "dependencies": {}
 }
