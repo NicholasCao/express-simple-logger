@@ -1,6 +1,7 @@
 # express-simple-logger
 
-[![npm version][npm-image]][npm-url]
+[![npm version][https://img.shields.io/npm/v/express-simple-logger.svg?style=flat-square]][https://www.npmjs.com/package/express-simple-logger]
+[![build status](https://travis-ci.org/NicholasCao/express-simple-logger.svg?branch=master)](https://travis-ci.org/NicholasCao/express-simple-logger)
 
  A logger middleware for [express](https://github.com/expressjs/express).Similar with [koa-logger](https://github.com/koajs/logger).
 
@@ -62,5 +63,3 @@ app.use(logger({
 
   MIT
 
-[npm-image]: https://img.shields.io/npm/v/express-simple-logger.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/express-simple-logger
