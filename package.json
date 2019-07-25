@@ -2,7 +2,7 @@
   "name": "express-simple-logger",
   "description": "Logging middleware for express",
   "repository": "NicholasCao/express-simple-logger",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "keywords": [
     "express",
     "middleware",
