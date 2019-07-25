@@ -1,5 +1,6 @@
 'use strict'
 
+// test tool
 const chai = require('chai')
 const request = require('supertest')
 const sinon = require('sinon')
@@ -9,6 +10,10 @@ chai.use(sc)
 const expect = chai.expect
 
 let log, sandbox, app
+
+/**
+ * test cases
+ */
 describe('koa-logger', function () {
   before(function () {
     app = require('./test-server')()
@@ -24,7 +29,7 @@ describe('koa-logger', function () {
   })
 
   it('should log a request', function (done) {
-    request(app.listen()).get('/200').expect(200, function () {
+    request(app.listen()).get('/200').expect(200, 'hello world', function () {
       expect(log).to.have.been.calledTwice
       done()
     })
@@ -75,6 +80,39 @@ describe('koa-logger', function () {
   it('should log a 500 response', function (done) {
     request(app.listen()).get('/500').expect(500, function () {
       expect(log).to.have.been.calledWith(sinon.match.any, '-->', 'GET', '/500', 500, sinon.match.any)
+      done()
+    })
+  })
+})
+
+describe('koa-logger with option', function () {
+  before(function () {
+    app = require('./test-server')({
+      unless: ['/ignorepath'],
+      logTime: false
+    })
+  })
+
+  beforeEach(function () {
+    sandbox = sinon.createSandbox()
+    log = sandbox.spy(console, 'log')
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
+  it('should log a response', function (done) {
+    request(app.listen()).get('/200').expect(200, function () {
+      expect(log).to.have.been.calledWith('', '<--', 'GET' ,'/200')
+      expect(log).to.have.been.calledWith('', '-->', 'GET', '/200', 200, sinon.match.any)
+      done()
+    })
+  })
+
+  it('should not log', function (done) {
+    request(app.listen()).get('/ignorepath').expect(200, 'ignorepath', function () {
+      expect(log).to.have.callCount(0)
       done()
     })
   })

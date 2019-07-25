@@ -9,11 +9,9 @@ const express = require('express')
 const logger = require('./index')
 
 
-module.exports = function () {
+module.exports = function (opt) {
   const app = express()
-  app.use(logger({
-    unless: ['/ignorepath']
-  }))
+  app.use(logger(opt))
   
   app.use(function (req, res, next) {
     if (req.path === '/200') res.send('hello world')
