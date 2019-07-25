@@ -55,11 +55,22 @@ app.use(logger())
   Param `str` is output string, args.join(' ')
   Param `args` is a array by `[logTime, format, method, url, status, time]`, when opt.logTime is false, logTime = ''
 
-### example
 ```js
+const http = require('http')
+
+...
 app.use(logger({
   unless: ['/ignorepath'],
-  logTime: false
+  logTime: false,
+  // custom logger
+  // add short description of status code
+  logger (str, args) {
+    if (args.length === 6) {
+      // response logger
+      args[4] = args[4] + ' ' + http.STATUS_CODES[args[4]]
+      console.log(...args)
+    }
+  }
 }))
 ```
 
