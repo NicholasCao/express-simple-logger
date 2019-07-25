@@ -5,7 +5,6 @@
 
  A logger middleware for [express](https://github.com/expressjs/express).Similar with [koa-logger](https://github.com/koajs/logger).
 
-
 ```
 [2019-7-22 17:24:30] <-- GET /
 [2019-7-22 17:24:31] --> GET / 200 835ms
@@ -19,11 +18,13 @@
 
 ## Installation
 
-```js
+Install via [npm](https://npmjs.com) or [yarn](https://yarnpkg.com)
+
+```bash
+# Use npm
 $ npm i express-simple-logger
-```
-or
-```js
+
+# Use yarn
 $ yarn add express-simple-logger
 ```
 
@@ -43,12 +44,16 @@ app.use(logger())
   Recommended that you `.use()` this middleware near the top
   to "wrap" all subsequent middleware.
 
-## Config
+## Option
 
-|params|type|required|description|
+|params|type|required|default|description|
 |---|---|---|---|
-|unless|Array|false|ignore path list|
-|logTime|Boolean|false|whether to log time|
+|unless|Array|false|[]|ignore path list|
+|logTime|Boolean|false|true|whether to log time|
+|logger|Function|false|--|custom logger  (str:String, args:Array)|
+
+  Param `str` is output string, args.join(' ')
+  Param `args` is a array by `[logTime, format, method, url, status, time]`, when opt.logTime is false, logTime = ''
 
 ### example
 ```js
@@ -58,8 +63,6 @@ app.use(logger({
 }))
 ```
 
-
 ## License
 
   MIT
-

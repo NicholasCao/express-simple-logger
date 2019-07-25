@@ -1,9 +1,5 @@
 'use strict'
 
-const log = function (...args) {
-  console.log(...args)
-}
-
 const dateFormat = function () {
   const padStart = function (num) {
     return String(num).padStart(2, '0')
@@ -17,7 +13,7 @@ const dateFormat = function () {
     minute = padStart(now.getMinutes()),
     second = padStart(now.getSeconds())
 
-  return `[${year}-${month}-${day} ${hour}:${minute}:${second}] `
+  return `[${year}-${month}-${day} ${hour}:${minute}:${second}]`
 }
 
 const defaultOption = {
@@ -26,6 +22,15 @@ const defaultOption = {
 }
 
 module.exports = function (opt = {}) {
+  const log = function (...args) {
+    if (opt.logger) {
+      let str = args.join(' ')
+      opt.logger(str, args)
+    } else {
+      console.log(...args)
+    }
+  }
+
   return function (req, res, next) {
     opt = { ...defaultOption, ...opt}
 
