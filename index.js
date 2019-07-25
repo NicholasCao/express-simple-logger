@@ -1,6 +1,8 @@
 'use strict'
 
-const log = console.log
+const log = function (...args) {
+  console.log(...args)
+}
 
 const dateFormat = function () {
   const padStart = function (num) {
@@ -33,7 +35,7 @@ module.exports = function (opt = {}) {
 
     let start = Date.now()
 
-    log(`${opt.logTime ? dateFormat() : ''}<-- ${req.method} ${req.path}`)
+    log(opt.logTime ? dateFormat() : '', '<--', req.method, req.originalUrl)
 
     next()
 
@@ -49,7 +51,7 @@ module.exports = function (opt = {}) {
       let upstream = event === 'close' ? '-x-' : '-->',
         delta = Date.now() - start,
         time = delta > 1000 ? Math.round(delta / 1000) + 's' : delta + 'ms'
-      log(`${opt.logTime ? dateFormat() : ''}${upstream} ${req.method} ${req.originalUrl} ${res.statusCode || 404} ${time}`)
+      log(opt.logTime ? dateFormat() : '', upstream, req.method, req.originalUrl, res.statusCode || 404, time)
     }
 
   }

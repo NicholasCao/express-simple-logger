@@ -46,8 +46,8 @@ app.use(logger())
 
 |params|type|required|description|
 |---|---|---|---|
-|unless|Array|false|ignore path list||
-|logTime|Boolean|false|whether to log time||
+|unless|Array|false|ignore path list|
+|logTime|Boolean|false|whether to log time|
 
 ### example
 ```js
