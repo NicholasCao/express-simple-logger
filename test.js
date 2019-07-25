@@ -121,7 +121,7 @@ describe('express-simple-logger with option', function () {
 describe('express-simple-logger with custom logger', function () {
   let opt = {
     logger (str, args) {
-      // console.log(str)
+      // do sth
     }
   }
 
@@ -138,7 +138,7 @@ describe('express-simple-logger with custom logger', function () {
     sandbox.restore()
   })
 
-  it('should log a response', function (done) {
+  it('should log with custom logger', function (done) {
     request(app.listen()).get('/200').expect(200, function () {
       let args = [sinon.match.string, '<--', 'GET' ,'/200']
       expect(log).to.have.been.calledWith(sinon.match.string, args)
